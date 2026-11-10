@@ -1,9 +1,0 @@
-# Configuration pour deployer gratuitement sur Render (https://render.com).
-# Sur Render : New + -> Blueprint -> choisir ce depot. Render lit ce fichier,
-# construit l'image Docker et met le site en ligne.
-services:
-  - type: web
-    name: portfolio-grauet-mathis
-    runtime: docker
-    plan: free
-    dockerfilePath: ./Dockerfile
