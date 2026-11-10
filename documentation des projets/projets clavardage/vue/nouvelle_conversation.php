@@ -25,7 +25,7 @@ require '../controller/guard.php';
 
 <main>
     <div>
-        <form id="signinForm" method="post" action="/../controller/createchat.php">
+        <form id="signinForm" method="post" action="../controller/createchat.php">
             <label for="username">Nom d'utilisateur</label>
             <input type="text" id="username" name="username" required>
 

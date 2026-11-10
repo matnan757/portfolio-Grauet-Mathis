@@ -30,7 +30,7 @@ $estAdmin = !empty($_SESSION['admin']);
         </div>
         <?php if ($estAdmin): ?>
             <div class="centrer">
-                <p>Vous êtes administrateur. <a class="bouton" href="/vue/admin/accueil_admin.php">Espace admin</a></p>
+                <p>Vous êtes administrateur. <a class="bouton" href="admin/accueil_admin.php">Espace admin</a></p>
             </div>
         <?php endif; ?>
     <?php else: ?>

@@ -15,7 +15,7 @@
 
 <main>
     <div>
-        <form id="signinForm" method="post" action="/../controller/signin.php">
+        <form id="signinForm" method="post" action="../controller/signin.php">
             <label for="username">Nom d'utilisateur</label>
             <input type="text" id="username" name="username" required>
 

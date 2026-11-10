@@ -228,7 +228,7 @@ for($i = 0 ;$i < $nbAllDiscussion; $i++)
                             <span class="conv-msg"><?= htmlspecialchars($conversation['last_message']) ?></span>
                         </div>
 
-                        <a href="/../controller/deletchat.php?id_discussion=<?= $conversation['id_discussion']?>"
+                        <a href="../controller/deletchat.php?id_discussion=<?= $conversation['id_discussion']?>"
                            class="delete-link"
                            onclick="return confirm('Supprimer ?');">
                             <span class="delete-icon">🗑</span>
@@ -243,7 +243,7 @@ for($i = 0 ;$i < $nbAllDiscussion; $i++)
                             <span class="conv-msg"><?= htmlspecialchars($conversation['last_message']) ?></span>
                         </a>
 
-                        <a href="/../controller/deletchat.php?id_discussion=<?= $conversation['id_discussion']?>"
+                        <a href="../controller/deletchat.php?id_discussion=<?= $conversation['id_discussion']?>"
                            class="delete-link"
                            onclick="return confirm('Supprimer ?');">
                             <span class="delete-icon">🗑</span>
@@ -271,7 +271,7 @@ for($i = 0 ;$i < $nbAllDiscussion; $i++)
 
 <footer>
     <p> © 2026 Clavardon</p>
-    <p><a href="/controller/logout.php">Se déconnecter</a></p>
+    <p><a href="../controller/logout.php">Se déconnecter</a></p>
 </footer>
 
 </body>

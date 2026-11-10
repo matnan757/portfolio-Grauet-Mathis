@@ -160,7 +160,7 @@ for($i = 0 ;$i < $nbMessages; $i++)
             </section>
         </aside>
 
-        <form class="chat-input" method="post" action="/../controller/message.php">
+        <form class="chat-input" method="post" action="../controller/message.php">
             <input
                     type="text"
                     name="message"

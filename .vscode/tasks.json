@@ -2,40 +2,10 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Site du stage (PHP)",
-            "detail": "Lance le site du Fournil des Corbières sur http://127.0.0.1:8000",
+            "label": "Portfolio complet (PHP)",
+            "detail": "Lance le portfolio et les sites PHP sur http://127.0.0.1:8080",
             "type": "shell",
-            "command": "C:\\php\\php.exe -S 127.0.0.1:8000 -t \"documentation des projets/stage 1\"",
-            "isBackground": true,
-            "problemMatcher": [],
-            "presentation": {
-                "reveal": "silent",
-                "panel": "dedicated"
-            },
-            "runOptions": {
-                "runOn": "folderOpen"
-            }
-        },
-        {
-            "label": "Site Clavardon (PHP)",
-            "detail": "Lance l'application de chat Clavardon sur http://127.0.0.1:8003",
-            "type": "shell",
-            "command": "C:\\php\\php.exe -S 127.0.0.1:8003 -t \"documentation des projets/projets clavardage\"",
-            "isBackground": true,
-            "problemMatcher": [],
-            "presentation": {
-                "reveal": "silent",
-                "panel": "dedicated"
-            },
-            "runOptions": {
-                "runOn": "folderOpen"
-            }
-        },
-        {
-            "label": "Site Neptune (PHP)",
-            "detail": "Lance le site de l'Hotel Neptune sur http://127.0.0.1:8002",
-            "type": "shell",
-            "command": "C:\\php\\php.exe -S 127.0.0.1:8002 -t \"documentation des projets/projet neptune\"",
+            "command": "C:\\php\\php.exe -S 127.0.0.1:8080 -t .",
             "isBackground": true,
             "problemMatcher": [],
             "presentation": {

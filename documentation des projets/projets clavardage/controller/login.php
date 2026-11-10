@@ -29,12 +29,12 @@ function authenticate(string $login, string $password): void
         $_SESSION["is_logged"] = true;
         $_SESSION["username"] = $login;
         $_SESSION["admin"] = $admin;
-        header("location: /vue/conversations.php");
+        header("location: ../vue/conversations.php");
         exit;
 
 //        var_dump($user);
     } else {
-        header("location: /vue/login.html");
+        header("location: ../vue/login.html");
 //        echo "Identifiant ou mot de passe incorrect.";
     }
 }

@@ -22,7 +22,7 @@ function deletmess(int $id_discussion) :void
     $stmt->bindValue('id_discussion', $id_discussion, PDO::PARAM_INT);
     $stmt->execute();
 
-    header("location: /../vue/conversations.php");
+    header("location: ../vue/conversations.php");
 
 }
 

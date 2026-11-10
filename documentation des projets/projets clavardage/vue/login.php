@@ -15,7 +15,7 @@
 
 <main>
     <div>
-        <form id="loginForm" method="post" action="/controller/login.php">
+        <form id="loginForm" method="post" action="../controller/login.php">
             <label for="login">Login</label>
             <input type="login" id="login" name="login" required>
 
