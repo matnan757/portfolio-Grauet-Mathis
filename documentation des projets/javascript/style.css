@@ -1,0 +1,188 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+/* Navigation */
+nav {
+    background-color: #0d0d0d;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #555;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #555;
+    border-color: #888;
+}
+
+nav a.active {
+    background-color: #666;
+    border-color: #aaa;
+}
+
+nav button:hover {
+    background-color: #555;
+    border-color: #888;
+}
+
+nav button.active {
+    background-color: #666;
+    border-color: #aaa;
+}
+
+/* Conteneur principal */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 20px;
+}
+
+/* Diaporama */
+.slideshow-container {
+    background-color: #2a2a2a;
+    border: 3px solid #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.slideshow {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    background-color: #3a3a3a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #fff;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.slideshow img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Conteneur du nom du burger */
+.burger-name {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    min-height: 25px;
+    color: #fff;
+}
+
+.burger-name p {
+    margin: 0;
+}
+
+/* Indicateurs du diaporama (optionnel) */
+.slideshow-dots {
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #666;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #fff;
+}
+
+/* Contenu des pages (caché par défaut) */
+.page-content {
+    display: none;
+}
+
+.page-content.active {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .slideshow {
+        width: 100%;
+        max-width: 300px;
+        height: 225px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    nav button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+}
+
+/* Messages et textes */
+.formulaire {
+    border: 2px solid #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.formulaire label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.erreur {
+    color: #ff6b6b;
+    margin-top: 10px;
+}
+
+.succes {
+    color: #7CFC00;
+    margin-top: 10px;
+}
+
+.texte-blanc {
+    color: #fff;
+    margin-top: 10px;
+}

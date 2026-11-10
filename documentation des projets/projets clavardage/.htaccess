@@ -1,0 +1,10 @@
+RewriteEngine On
+
+
+# Si le fichier ou le dossier n'existe pas
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_DIRNAME} !-d
+
+# Redirection vers l'index du dossier actuel
+#RewriteRule ^(.*)$ index.php [L,QSA]
+RewriteRule ^.+ /index.php [R=301,L]

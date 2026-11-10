@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+}
+
+header {
+    background-color: #0A3D62;
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.centrer {
+    text-align: center;
+}
+
+.logo {
+    height: 100px;
+    width: 100px;
+}
+
+.lien-acceuil {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.titre-acceuil {
+    font-size: 2,5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 2rem 0 0 0;
+    padding: 0;
+}
+
+.bouton {
+    background-color: #0A3D62;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+    margin : 10px;
+}
+
+.bouton:hover {
+    background-color: #0d5a8f;
+}
+.formulaire {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    background-color: #f4f7fa;
+    border: 1px solid #0A3D62;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 20px auto;
+}
+
+.formulaire label {
+    font-weight: bold;
+    color: #0A3D62;
+}
+
+.formulaire input {
+    padding: 8px 10px;
+    border: 1px solid #b7c6d4;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.message-erreur {
+    color: #b00020;
+    font-weight: bold;
+}
+
+.message-info {
+    color: #0A3D62;
+    font-weight: bold;
+}
+
+.chambres-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.chambre-carte {
+    background-color: #ffffff;
+    border: 1px solid #0A3D62;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 4px 12px rgba(10,61,98,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chambre-carte h3 {
+    color: #0A3D62;
+    margin: 0;
+}
+
+.chambre-desc {
+    color: #444;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.chambre-infos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    color: #0A3D62;
+}
+
+.chambre-prix {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.badge-dispo, .badge-indispo {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    width: fit-content;
+}
+
+.badge-dispo { background-color: #e3f6e8; color: #1b7a3d; }
+.badge-indispo { background-color: #fbe3e3; color: #b00020; }

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 112">
+  <polygon points="50,2 96,28.5 96,83.5 50,110 4,83.5 4,28.5" fill="#00599C"/>
+  <polygon points="50,2 96,28.5 96,83.5 50,110" fill="#004482"/>
+  <text x="50" y="68" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="bold" fill="#fff">C++</text>
+</svg>

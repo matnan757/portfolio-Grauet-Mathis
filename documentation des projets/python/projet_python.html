@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Python - Gestion École</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f6f6f6; color: #333; line-height: 1.6; }
+        header { background: #e76b50; color: #fff; padding: 32px 16px; text-align: center; }
+        header h1 { margin: 0 0 6px; font-size: 1.9rem; }
+        header p { margin: 0; opacity: 0.95; }
+        .retour { display: inline-block; margin-top: 16px; color: #fff; border: 2px solid #fff; padding: 6px 16px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+        .retour:hover { background: #fff; color: #e76b50; }
+        main { max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; }
+        section { background: #fff; border: 2px solid #e76b50; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        h2 { color: #e76b50; margin-top: 0; }
+        .apercu { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+        .apercu img { max-width: 100%; width: 420px; border: 1px solid #ccc; border-radius: 6px; }
+        .apercu ul { flex: 1; min-width: 240px; margin: 0; padding-left: 20px; }
+        .apercu li { margin-bottom: 8px; }
+        .tags span { display: inline-block; background: #fff5f2; border: 1px solid #e76b50; color: #e76b50; border-radius: 999px; padding: 2px 12px; margin: 0 6px 6px 0; font-size: 0.9rem; font-weight: bold; }
+        table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+        th, td { border: 1px solid #ddd; padding: 6px 10px; text-align: left; }
+        th { background: #fff5f2; }
+        .tables { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+        .tables h3 { margin: 0 0 6px; font-size: 1rem; }
+        .onglets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0; }
+        .onglets button { border: 2px solid #e76b50; background: #fff; color: #e76b50; padding: 6px 12px; border-radius: 6px 6px 0 0; cursor: pointer; font-weight: bold; font-family: inherit; }
+        .onglets button.actif { background: #e76b50; color: #fff; }
+        pre { margin: 0; background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 0 6px 6px 6px; overflow-x: auto; font-size: 0.85rem; line-height: 1.45; max-height: 600px; }
+        .code { display: none; }
+        .code.actif { display: block; }
+        @media (max-width: 600px) { section { padding: 16px; } header h1 { font-size: 1.5rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Projet transversal : application en Python</h1>
+        <p>« Bibliothèque universitaire et gestion de ressources » · 06/02/2026 au 10/03/2026</p>
+        <a class="retour" href="../../page du portfolio/acceuil.html#projets">← Retour au portfolio</a>
+    </header>
+
+    <main>
+        <section>
+            <h2>Le projet</h2>
+            <p>Application de bureau qui permet à une école de gérer ses ressources (salles, matériel, livres) et leurs emprunts par les élèves et les professeurs. L'interface graphique est faite avec Tkinter et les données sont enregistrées dans une base SQLite.</p>
+            <div class="tags"><span>Python</span><span>Tkinter</span><span>SQLite</span><span>Programmation objet</span></div>
+        </section>
+
+        <section>
+            <h2>Aperçu de l'application</h2>
+            <div class="apercu">
+                <img src="capture_application.png" alt="Fenêtre de l'application Gestion École affichant la liste des ressources">
+                <ul>
+                    <li><strong>Ajout rapide</strong> d'une ressource avec son type (Salle, Matériel, Livre), avec un message d'erreur si le nom est vide.</li>
+                    <li><strong>Choix de la table affichée</strong> : ressources, emprunts ou utilisateurs.</li>
+                    <li><strong>Emprunter</strong> : une fenêtre s'ouvre pour choisir l'utilisateur. Un objet déjà pris ne peut pas être emprunté.</li>
+                    <li><strong>Rendre</strong> un objet après confirmation : il redevient « Libre ».</li>
+                    <li><strong>Supprimer</strong> une ressource ou <strong>vider</strong> une table, toujours avec une demande de confirmation.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Organisation du code</h2>
+            <p>Le code est séparé en deux classes :</p>
+            <ul>
+                <li><strong>GestionInterface</strong> construit la fenêtre et réagit aux clics de l'utilisateur.</li>
+                <li><strong>Passerelle</strong> s'occupe de la base de données : création des tables, ajout, emprunt, retour et suppression, avec des requêtes SQL paramétrées.</li>
+            </ul>
+            <p>Le dossier <code>v1</code> contient la première version du projet, sans base de données (classes Ressource, utilisateur et Bibliotheque).</p>
+            <h3>Tables de la base de données</h3>
+            <div class="tables">
+                <div><h3>ressources</h3><table><tr><th>Colonne</th><th>Type</th></tr><tr><td>id_ressources</td><td>INTEGER (clé)</td></tr><tr><td>nom_ressources</td><td>TEXT</td></tr><tr><td>type_ressources</td><td>TEXT</td></tr><tr><td>etat_ressources</td><td>INTEGER (1 = libre)</td></tr></table></div>
+                <div><h3>emprunt</h3><table><tr><th>Colonne</th><th>Type</th></tr><tr><td>id_emprunt</td><td>INTEGER (clé)</td></tr><tr><td>nom_objet</td><td>TEXT</td></tr><tr><td>nom_users</td><td>TEXT</td></tr></table></div>
+                <div><h3>utilisateurs</h3><table><tr><th>Colonne</th><th>Type</th></tr><tr><td>id_utilisateur</td><td>INTEGER (clé)</td></tr><tr><td>nom / prenom</td><td>TEXT</td></tr><tr><td>email</td><td>TEXT</td></tr><tr><td>statut</td><td>TEXT</td></tr></table></div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Code source</h2>
+            <div class="onglets">
+                <button class="actif" data-cible="code0">interface.py</button>
+                <button class="" data-cible="code1">classe/GestionInterface.py</button>
+                <button class="" data-cible="code2">classe/base_donnee.py</button>
+                <button class="" data-cible="code3">v1/bibliotheque.py</button>
+                <button class="" data-cible="code4">v1/Ressource.py</button>
+                <button class="" data-cible="code5">v1/utilisateur.py</button>
+            </div>
+            <div class="code actif" id="code0"><pre><code>from classe.GestionInterface import *
+
+app = GestionInterface()
+
+app.lancer()</code></pre></div>
+            <div class="code" id="code1"><pre><code>import tkinter as tk
+from tkinter import messagebox, simpledialog
+from classe.base_donnee import Passerelle
+
+class GestionInterface:
+    def __init__(self):
+        
+        self.db = Passerelle(&quot;stockage.db&quot;)
+        
+
+
+
+                                            #FENETRE INTERFACE
+        self.app = tk.Tk()
+        self.app.title(&quot;Gestion École&quot;)
+        self.app.geometry(&quot;550x600&quot;)
+
+        #Variables de contrôle
+        self.variable_type = tk.StringVar(self.app)
+        self.variable_selection = tk.StringVar(self.app, value=&quot;ressources&quot;)
+        
+        #Construction de l&#x27;interface
+        self.setup_ui()
+        
+        self.actualiser_affichage()
+
+    def lancer(self):
+        self.app.mainloop()
+
+    def setup_ui(self):
+        # Formulaire
+        cadre_form = tk.LabelFrame(self.app, text=&quot;Ajout Rapide&quot;, padx=10, pady=10)
+        cadre_form.pack(pady=10, padx=10, fill=&quot;x&quot;)
+
+        self.entree_nom = tk.Entry(cadre_form)
+        self.entree_nom.pack(side=tk.LEFT, padx=5, expand=True, fill=&quot;x&quot;)
+
+        types = [&quot;Salle&quot;, &quot;Matériel&quot;, &quot;Livre&quot;]
+        self.variable_type.set(types[0])
+        tk.OptionMenu(cadre_form, self.variable_type, *types).pack(side=tk.LEFT, padx=5)
+
+        tk.Button(cadre_form, text=&quot;Ajouter&quot;, command=self.action_ajouter, bg=&quot;#4CAF50&quot;, fg=&quot;white&quot;).pack(side=tk.LEFT)
+
+        #Menu Table
+        tk.Label(self.app, text=&quot;Table affichée :&quot;).pack(pady=5)
+        tables = [&quot;ressources&quot;, &quot;emprunt&quot;, &quot;utilisateurs&quot;]
+        tk.OptionMenu(self.app, self.variable_selection, *tables, command=self.actualiser_affichage).pack()
+
+        #Liste
+        cadre_liste = tk.Frame(self.app)
+        cadre_liste.pack(pady=5, padx=10, fill=&quot;both&quot;, expand=True)
+        
+        scroll = tk.Scrollbar(cadre_liste)
+        scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        self.liste_visuelle = tk.Listbox(cadre_liste, yscrollcommand=scroll.set, height=15)
+        self.liste_visuelle.pack(side=tk.LEFT, fill=&quot;both&quot;, expand=True)
+        scroll.config(command=self.liste_visuelle.yview)
+
+        #Boutons Bas
+        cadre_bas = tk.Frame(self.app)
+        cadre_bas.pack(side=tk.BOTTOM, fill=&quot;x&quot;, pady=10, padx=10)
+
+        tk.Button(cadre_bas, text=&quot;Vider Table&quot;, command=self.action_vider, bg=&quot;orange&quot;).pack(side=tk.LEFT)
+        tk.Button(cadre_bas, text=&quot;Supprimer&quot;, command=self.action_supprimer, bg=&quot;#d32f2f&quot;, fg=&quot;white&quot;).pack(side=tk.RIGHT, padx=5)
+        tk.Button(cadre_bas, text=&quot;Emprunter&quot;, command=self.action_emprunter, bg=&quot;#2196F3&quot;, fg=&quot;white&quot;).pack(side=tk.RIGHT, padx=5)
+        tk.Button(cadre_bas, text=&quot;Rendre&quot;, command=self.action_rendre, bg=&quot;#9C27B0&quot;, fg=&quot;white&quot;).pack(side=tk.RIGHT, padx=5)
+
+
+
+
+
+
+
+                                                    #LES FONCTIONS
+
+    def actualiser_affichage(self, event=None):
+        table = self.variable_selection.get()
+        self.liste_visuelle.delete(0, tk.END)
+        
+        #Appel via la classe db
+        donnees = self.db.recuperer_contenu_table(table)
+        
+        for ligne in donnees:
+            if table == &quot;ressources&quot;:
+                etat = &quot;Libre&quot; if ligne[3] == 1 else &quot;Pris&quot;
+                self.liste_visuelle.insert(tk.END, f&quot;ID: {ligne[0]} | {ligne[1]} ({ligne[2]}) | {etat}&quot;)
+            elif table == &quot;utilisateurs&quot;:
+                 self.liste_visuelle.insert(tk.END, f&quot;ID: {ligne[0]} | {ligne[1]} {ligne[2]} ({ligne[4]})&quot;)
+            else:
+                self.liste_visuelle.insert(tk.END, f&quot;ID: {ligne[0]} | {ligne[1]} -&gt; {ligne[2]}&quot;)
+
+    def action_ajouter(self):
+        nom = self.entree_nom.get()
+        type_res = self.variable_type.get()
+        
+        if nom.strip():
+            #Appel via la classe db
+            self.db.ajouter_ressource_manuelle(nom, type_res)
+            messagebox.showinfo(&quot;Succès&quot;, f&quot;{nom} ajouté !&quot;)
+            self.entree_nom.delete(0, tk.END)
+            self.actualiser_affichage()
+        else:
+            messagebox.showwarning(&quot;Erreur&quot;, &quot;Le nom ne peut pas être vide.&quot;)
+
+    def action_supprimer(self):
+        try:
+            index = self.liste_visuelle.curselection()[0]
+            texte = self.liste_visuelle.get(index)
+            id_obj = int(texte.split(&#x27;|&#x27;)[0].replace(&#x27;ID:&#x27;, &#x27;&#x27;).strip())
+            
+            if messagebox.askyesno(&quot;Confirmation&quot;, &quot;Supprimer cet élément ?&quot;):
+                # Appel via la classe db
+                self.db.supprimer_ressource_db(id_obj)
+                self.actualiser_affichage()
+        except IndexError:
+            messagebox.showwarning(&quot;Attention&quot;, &quot;Sélectionnez une ligne d&#x27;abord.&quot;)
+
+    def action_emprunter(self):
+        try:
+            index = self.liste_visuelle.curselection()[0]
+            texte_ressource = self.liste_visuelle.get(index)
+            
+            if self.variable_selection.get() != &quot;ressources&quot;:
+                messagebox.showwarning(&quot;Erreur&quot;, &quot;Placez-vous sur la table &#x27;ressources&#x27; pour emprunter.&quot;)
+                return
+
+            if &quot;Pris&quot; in texte_ressource:
+                messagebox.showerror(&quot;Oups&quot;, &quot;Cet objet est déjà emprunté !&quot;)
+                return
+
+            id_obj = int(texte_ressource.split(&#x27;|&#x27;)[0].replace(&#x27;ID:&#x27;, &#x27;&#x27;).strip())
+            nom_obj = texte_ressource.split(&#x27;|&#x27;)[1].split(&#x27;(&#x27;)[0].strip()
+
+                                                
+                                                
+                                                
+                                                
+                                                
+                                                # FENETRE D&#x27;INTERFACE POPUP
+
+
+            fenetre_users = tk.Toplevel(self.app)
+            fenetre_users.title(&quot;Qui emprunte ?&quot;)
+            fenetre_users.geometry(&quot;300x400&quot;)
+            
+            tk.Label(fenetre_users, text=f&quot;Emprunt de : {nom_obj}&quot;, font=(&quot;Arial&quot;, 10, &quot;bold&quot;)).pack(pady=10)
+            tk.Label(fenetre_users, text=&quot;Sélectionnez un utilisateur :&quot;).pack()
+
+            cadre_liste_u = tk.Frame(fenetre_users)
+            cadre_liste_u.pack(fill=&quot;both&quot;, expand=True, padx=10, pady=5)
+            
+            scroll_u = tk.Scrollbar(cadre_liste_u)
+            scroll_u.pack(side=tk.RIGHT, fill=tk.Y)
+            
+            liste_users_box = tk.Listbox(cadre_liste_u, yscrollcommand=scroll_u.set)
+            liste_users_box.pack(side=tk.LEFT, fill=&quot;both&quot;, expand=True)
+            scroll_u.config(command=liste_users_box.yview)
+
+            tous_les_users = self.db.recuperer_contenu_table(&quot;utilisateurs&quot;)
+            
+            for u in tous_les_users:
+                liste_users_box.insert(tk.END, f&quot;{u[1]} {u[2]} ({u[4]})&quot;)
+
+            def valider_choix():
+                try:
+                    index_u = liste_users_box.curselection()[0]
+                    infos_user = liste_users_box.get(index_u)
+                    
+                    nom_final = infos_user.split(&#x27;(&#x27;)[0].strip()
+
+                    reussite = self.db.enregistrer_emprunt(id_obj, nom_obj, nom_final)
+                    
+                    if reussite:
+                        messagebox.showinfo(&quot;Succès&quot;, f&quot;{nom_obj} prêté à {nom_final}.&quot;)
+                        self.actualiser_affichage()
+                        fenetre_users.destroy()
+                    else:
+                        messagebox.showerror(&quot;Erreur&quot;, &quot;Problème lors de l&#x27;emprunt.&quot;)
+                        
+                except IndexError:
+                    messagebox.showwarning(&quot;Attention&quot;, &quot;Veuillez sélectionner une personne dans la liste.&quot;)
+
+            tk.Button(fenetre_users, text=&quot;VALIDER L&#x27;EMPRUNT&quot;, command=valider_choix, bg=&quot;#4CAF50&quot;, fg=&quot;white&quot;).pack(pady=10)
+
+        except IndexError:
+            messagebox.showwarning(&quot;Attention&quot;, &quot;Sélectionnez d&#x27;abord un objet à emprunter.&quot;)
+
+    def action_rendre(self):
+        try:
+            index = self.liste_visuelle.curselection()[0]
+            texte = self.liste_visuelle.get(index)
+            
+            if self.variable_selection.get() != &quot;ressources&quot;:
+                messagebox.showwarning(&quot;Erreur&quot;, &quot;Placez-vous sur la table &#x27;ressources&#x27; pour rendre un objet.&quot;)
+                return
+
+            id_obj = int(texte.split(&#x27;|&#x27;)[0].replace(&#x27;ID:&#x27;, &#x27;&#x27;).strip())
+            nom_obj = texte.split(&#x27;|&#x27;)[1].split(&#x27;(&#x27;)[0].strip()
+
+            if &quot;Libre&quot; in texte:
+                messagebox.showinfo(&quot;Info&quot;, &quot;Cet objet est déjà libre !&quot;)
+                return
+
+            if messagebox.askyesno(&quot;Retour&quot;, f&quot;Confirmer le retour de : {nom_obj} ?&quot;):
+                self.db.rendre_ressource(id_obj, nom_obj)
+                self.actualiser_affichage()
+                messagebox.showinfo(&quot;Succès&quot;, &quot;L&#x27;objet est rendu.&quot;)
+                
+        except IndexError:
+            messagebox.showwarning(&quot;Attention&quot;, &quot;Sélectionnez un objet à rendre.&quot;)
+
+    def action_vider(self):
+        table = self.variable_selection.get()
+        if messagebox.askyesno(&quot;Danger&quot;, f&quot;Vider toute la table {table} ?&quot;):
+            self.db.vider_table_complete(table)
+            self.actualiser_affichage()</code></pre></div>
+            <div class="code" id="code2"><pre><code>import sqlite3
+
+class Passerelle:
+    def __init__(self, db_name=&quot;stockage.db&quot;):
+        &quot;&quot;&quot;Constructeur : Initialise le nom de la BDD et crée les tables.&quot;&quot;&quot;
+        self.db_name = db_name
+        self.initialiser_db()
+
+    def initialiser_db(self):
+        &quot;&quot;&quot;Crée les tables si elles n&#x27;existent pas.&quot;&quot;&quot;
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        
+        #Table Emprunt
+        curseur.execute(&#x27;&#x27;&#x27;
+            CREATE TABLE IF NOT EXISTS emprunt (
+                id_emprunt INTEGER PRIMARY KEY AUTOINCREMENT,
+                nom_objet TEXT NOT NULL,
+                nom_users TEXT NOT NULL
+            )
+        &#x27;&#x27;&#x27;)
+
+        #Table Ressources
+        curseur.execute(&#x27;&#x27;&#x27;
+            CREATE TABLE IF NOT EXISTS ressources (
+                id_ressources INTEGER PRIMARY KEY AUTOINCREMENT,
+                nom_ressources TEXT NOT NULL,
+                type_ressources TEXT NOT NULL,
+                etat_ressources INTEGER DEFAULT 1
+            )
+        &#x27;&#x27;&#x27;)
+
+        #Table Utilisateurs
+        curseur.execute(&#x27;&#x27;&#x27;
+            CREATE TABLE IF NOT EXISTS utilisateurs (
+                id_utilisateur INTEGER PRIMARY KEY AUTOINCREMENT,
+                nom TEXT NOT NULL,
+                prenom TEXT NOT NULL,
+                email TEXT,
+                statut TEXT
+            )
+        &#x27;&#x27;&#x27;)
+
+        conn.commit()
+        conn.close()
+
+    def recuperer_contenu_table(self, nom_table):
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        try:
+            curseur.execute(f&quot;SELECT * FROM {nom_table}&quot;)
+            return curseur.fetchall()
+        except:
+            return []
+        finally:
+            conn.close()
+
+    def ajouter_ressource_manuelle(self, nom, type_res):
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        curseur.execute(&#x27;&#x27;&#x27;
+            INSERT INTO ressources (nom_ressources, type_ressources, etat_ressources) 
+            VALUES (?, ?, 1)
+        &#x27;&#x27;&#x27;, (nom, type_res))
+        conn.commit()
+        conn.close()
+
+    def verifier_disponibilite(self, id_res):
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        curseur.execute(&quot;SELECT etat_ressources FROM ressources WHERE id_ressources = ?&quot;, (id_res,))
+        resultat = curseur.fetchone()
+        conn.close()
+        
+        if resultat:
+            etat = resultat[0]
+            return etat == 1
+        return False
+
+    def enregistrer_emprunt(self, id_res, nom_objet, nom_utilisateur):
+        &quot;&quot;&quot;Enregistre l&#x27;emprunt SEULEMENT si l&#x27;objet est libre.&quot;&quot;&quot;
+
+        if not self.verifier_disponibilite(id_res):
+            print(&quot;ERREUR: L&#x27;objet est déjà emprunté.&quot;)
+            return False
+            
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        try:
+            curseur.execute(&quot;INSERT INTO emprunt (nom_objet, nom_users) VALUES (?, ?)&quot;, (nom_objet, nom_utilisateur))
+            
+            curseur.execute(&quot;UPDATE ressources SET etat_ressources = 0 WHERE id_ressources = ?&quot;, (id_res,))
+            
+            conn.commit()
+            print(f&quot;SUCCÈS: {nom_objet} emprunté par {nom_utilisateur}&quot;)
+            return True
+        except Exception as e:
+            print(f&quot;ERREUR SQL: {e}&quot;)
+            return False
+        finally:
+            conn.close()
+
+    def supprimer_ressource_db(self, id_res):
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        curseur.execute(&quot;DELETE FROM ressources WHERE id_ressources = ?&quot;, (id_res,))
+        conn.commit()
+        conn.close()
+
+    def vider_table_complete(self, nom_table):
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        curseur.execute(f&quot;DELETE FROM {nom_table}&quot;)
+        curseur.execute(&quot;DELETE FROM sqlite_sequence WHERE name=?&quot;, (nom_table,))
+        conn.commit()
+        conn.close()
+
+    def supprimer_table_definitivement(self, nom_table):
+        &quot;&quot;&quot;Détruit la table et sa structure.&quot;&quot;&quot;
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        curseur.execute(f&quot;DROP TABLE IF EXISTS {nom_table}&quot;)
+        conn.commit()
+        conn.close()
+
+    def rendre_ressource(self, id_res, nom_objet):
+        &quot;&quot;&quot;Met fin à un emprunt.&quot;&quot;&quot;
+        conn = sqlite3.connect(self.db_name)
+        curseur = conn.cursor()
+        try:
+            curseur.execute(&quot;UPDATE ressources SET etat_ressources = 1 WHERE id_ressources = ?&quot;, (id_res,))
+            curseur.execute(&quot;DELETE FROM emprunt WHERE nom_objet = ?&quot;, (nom_objet,))
+            conn.commit()
+            print(f&quot;Ressource {nom_objet} rendue.&quot;)
+            return True
+        except Exception as e:
+            print(f&quot;Erreur retour: {e}&quot;)
+            return False
+        finally:
+            conn.close()
+
+if __name__ == &quot;__main__&quot;:
+    db = Passerelle()
+    print(&quot;Base de données initialisée via la classe Passerelle.&quot;)</code></pre></div>
+            <div class="code" id="code3"><pre><code>from v1.Ressource import Ressource
+from v1.utilisateur import utilisateur
+
+class Bibliotheque:
+    def __init__(self, stockage=None, emprunts=None):
+        self.stockage = stockage if stockage is not None else []
+        self.emprunts = emprunts if emprunts is not None else []
+
+    def ajouter_ressource(self, nom, type):
+        if self.trouver_ressource(nom) is not None:
+            return &quot;Ressource deja existante.&quot;
+        self.stockage.append(Ressource(nom, type, 1))
+        return &quot;La ressource a ete ajoutee avec succes.&quot;
+
+    def emprunter(self, nom):
+        ressource = self.trouver_ressource(nom)
+        if not ressource in self.stockage:
+            return &quot;Ressource introuvable.&quot;
+        if ressource.etat == 0:
+            return &quot;Desolee, cette ressource n&#x27;est pas disponible pour le moment.&quot;
+        ressource.etat = 0
+        self.emprunts.append(nom)
+        return &quot;La ressource a ete empruntee avec succes.&quot;
+
+    def rendre(self, nom):
+        ressource = self.trouver_ressource(nom)
+        if ressource is None:
+            return &quot;Ressource introuvable.&quot;
+        if nom not in self.emprunts:
+            return &quot;Ressource introuvable ou pas empruntee.&quot;
+        if ressource.etat == 1:
+            return &quot;Cette ressource n&#x27;etait pas empruntee.&quot;
+        ressource.etat = 1
+        self.emprunts.remove(nom)
+        return &quot;La ressource a ete rendue avec succes.&quot;
+
+    def afficher_ressources_disponibles(self):
+        disponibles = [r.nom for r in self.stockage if r.etat == 1]
+        if not disponibles:
+            return &quot;Aucune ressource disponible pour le moment.&quot;
+        return &quot;Ressources disponibles: &quot; + &quot;, &quot;.join(disponibles)
+
+    def trouver_ressource(self, nom):
+        for ressource in self.stockage  :
+            if ressource.nom == nom:
+                return ressource
+        return None</code></pre></div>
+            <div class="code" id="code4"><pre><code>class Ressource:
+    def __init__(self, nom, type, etat=1):
+        self.nom = nom
+        self.type = type
+        self.etat = etat</code></pre></div>
+            <div class="code" id="code5"><pre><code>class utilisateur:
+    def __init__(self, nom, prenom, email, classe):
+        self.nom = nom
+        self.prenom = prenom
+        self.email = email
+        self.classe = classe
+    
+    def afficher_info(self):
+        return f&quot;Nom: {self.nom}, Prenom: {self.prenom}, Email: {self.email}&quot;</code></pre></div>
+        </section>
+    </main>
+
+    <script>
+        // Affiche le fichier de code choisi dans les onglets
+        document.querySelectorAll('.onglets button').forEach(function (bouton) {
+            bouton.addEventListener('click', function () {
+                document.querySelectorAll('.onglets button, .code').forEach(function (el) { el.classList.remove('actif'); });
+                bouton.classList.add('actif');
+                document.getElementById(bouton.dataset.cible).classList.add('actif');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Bases de donnees SQLite (recreees automatiquement au lancement des sites)
+*.db
+
+# Fichiers systeme
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dossiers de cache / temporaires
+__pycache__/
+*.pyc

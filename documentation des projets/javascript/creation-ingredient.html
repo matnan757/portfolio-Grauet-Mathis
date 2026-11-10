@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Shop - Création Ingrédient</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="nav-btn" href="index.html">Accueil</a></li>
+            <li><a class="nav-btn" href="creation-burger.html">Création Burger</a></li>
+            <li><a class="nav-btn active" href="creation-ingredient.html">Création Ingrédient</a></li>
+            <li><a class="nav-btn" href="qui-sommes.html">Qui sommes-nous ?</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="slideshow-container">
+            <fieldset class="formulaire">
+                <legend>Créer votre Ingrédient</legend>
+                <label>Nom : <input type="text" id="ingredient-nom"></label>
+                <label>Quantité : <input type="number" id="ingredient-quantite"></label>
+                <button id="btn-creer-ingredient">Créer l'ingrédient</button>
+            </fieldset>
+
+            <!-- Message d'erreur entre les deux blocs -->
+            <p id="erreur-ingredient"></p>
+
+            <div class="bloc-image-ingredients">
+                <p>Image des ingrédients</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-4.0.0.min.js"></script>
+    <script src="js/commun.js"></script>
+    <script src="js/ingredient.js"></script>
+</body>
+</html>

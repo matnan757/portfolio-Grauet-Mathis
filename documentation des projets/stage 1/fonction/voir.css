@@ -1,0 +1,39 @@
+
+        body {
+            padding: 20px;
+            background-color: #f4f1ea;
+        }
+        .admin-header {
+            background: #5d4037;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-back {
+            background-color: #f3e5ab;
+            color: #5d4037;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .btn-back:hover {
+            background-color: #d84315;
+            color: white;
+        }
+
+        .product-card {
+            cursor: grab !important;
+        }
+        .product-card:active {
+            cursor: grabbing !important;
+        }
+        .sortable-ghost {
+            opacity: 0.4;
+            transform: scale(0.95);
+            border: 2px dashed #d84315;
+        }

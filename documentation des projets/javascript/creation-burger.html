@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Shop - Création Burger</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="nav-btn" href="index.html">Accueil</a></li>
+            <li><a class="nav-btn active" href="creation-burger.html">Création Burger</a></li>
+            <li><a class="nav-btn" href="creation-ingredient.html">Création Ingrédient</a></li>
+            <li><a class="nav-btn" href="qui-sommes.html">Qui sommes-nous ?</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="slideshow-container">
+            <fieldset class="formulaire">
+                <legend>Créer votre Burger</legend>
+                <label>Nom du burger : <input type="text" id="burger-nom"></label>
+                <label>Ingrédient 1 : <select id="ingredient1"></select></label>
+                <label>Ingrédient 2 : <select id="ingredient2"></select></label>
+                <label>Ingrédient 3 : <select id="ingredient3"></select></label>
+                <button id="btn-creer-burger">Créer le burger</button>
+            </fieldset>
+
+            <!-- Message d'erreur sous le bloc -->
+            <p id="erreur-burger"></p>
+        </div>
+    </div>
+
+    <script src="js/jquery-4.0.0.min.js"></script>
+    <script src="js/commun.js"></script>
+    <script src="js/burger.js"></script>
+</body>
+</html>
